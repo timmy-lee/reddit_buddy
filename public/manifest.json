@@ -11,5 +11,9 @@
     "default_popup": "index.html"
   },
   "options_page": "options.html",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
   "manifest_version": 2
 }
