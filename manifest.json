@@ -1,0 +1,10 @@
+{
+  "name": "Reddit Notification",
+  "version": "0.0.1",
+  "description": "Get notified when something new happens",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "manifest_version": 2
+}
