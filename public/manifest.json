@@ -1,19 +1,20 @@
 {
-  "name": "Reddit Notification",
-  "version": "0.0.1",
-  "description": "Get notified when something new happens",
-  "permissions": ["storage", "https://reddit.com/*"],
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
-  "browser_action": {
-    "default_popup": "index.html"
-  },
-  "options_page": "options.html",
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff",
-  "manifest_version": 2
+	"name": "Reddit Notification",
+	"version": "0.0.1",
+	"description": "Get notified when something new happens",
+	"permissions": ["storage", "https://reddit.com/*"],
+	"background": {
+		"scripts": ["background.js"],
+		"persistent": false
+	},
+	"browser_action": {
+		"default_popup": "index.html"
+	},
+	"options_page": "options.html",
+	"start_url": ".",
+	"display": "standalone",
+	"theme_color": "#000000",
+	"background_color": "#ffffff",
+	"manifest_version": 2,
+	"content_security_policy": "script-src 'self' 'sha256-5As4+3YpY62+l38PsxCEkjB1R4YtyktBtRScTJ3fyLU='; object-src 'self'"
 }
