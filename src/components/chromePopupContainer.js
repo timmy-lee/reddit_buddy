@@ -12,6 +12,7 @@ export default class ChromePopupContainer extends React.Component {
   }
 
   render() {
+    console.log('hi');
     const { activeTab } = this.state;
     return (
       <div className='chrome-popup-container'>
