@@ -1,5 +1,12 @@
 <html>
+  <head>
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <script type="text/javascript" src="/static/js/bundle.js">
+      console.log('hello');
+      ReactDOM.render(<OptionsPage />, document.findElementById('options'))
+    </script>
+  </head>
   <body>
-    <div>Hello World</div>
+    <div id='options'>Hello World</div>
   </body>
 </html>
