@@ -1,5 +1,12 @@
 .chrome-popup-container {
+  font-family: 'Monaco';
+  font-size: 12px;
   width: 500px;
+  padding: 0;
+  margin: 0;
+}
+
+.chrome-popup-container ul {
   padding: 0;
   margin: 0;
 }
@@ -7,7 +14,7 @@
 .chrome-popup-container li {
   display: inline-block;
   padding: 10px;
-  border: 2px solid #686DB3;
+  border: 2px solid #AE50B3;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
@@ -17,5 +24,10 @@
 }
 
 .chrome-popup-container li.active {
-  background-color: #FFBDA1;
+  background-color: #BCFF8C;
+}
+
+.tab-body-container {
+  border: 1px solid #AE50B3;
+  height: 500px;
 }

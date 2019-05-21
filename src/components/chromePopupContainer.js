@@ -2,6 +2,7 @@ import React from 'react';
 import NewThreads from './newThreads';
 import Manage from './manage';
 import Add from './add';
+import Settings from './settings';
 import '../stylesheets/chromePopupContainer.css'
 
 export default class ChromePopupContainer extends React.Component {
@@ -33,6 +34,12 @@ export default class ChromePopupContainer extends React.Component {
           >
             Add Subscriptions
           </li>
+          <li
+            onClick={() => this._navigateToTab('settings')}
+            className={activeTab === 'settings' ? 'active' : ''}
+          >
+            Settings
+          </li>
         </ul>
         {this._getTabBody()}
       </div>
@@ -53,6 +60,8 @@ export default class ChromePopupContainer extends React.Component {
         return <Manage />
       case 'add':
         return <Add />
+      case 'settings':
+        return <Settings />
       default:
         return null;
     }
