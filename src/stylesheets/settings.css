@@ -4,3 +4,10 @@
   margin-left: 10px;
   -webkit-appearance: none;
 }
+
+.chrome-popup-container .success-message {
+  padding: 5px;
+  color: #fff;
+  background-color: #6EB33E;
+  border-radius: 5px;
+}

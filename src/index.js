@@ -1,12 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
-// import OptionsPage from './components/optionsPage';
 import ChromePopupContainer from './components/ChromePopupContainer';
 import * as serviceWorker from './serviceWorker';
 
-// ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(<ChromePopupContainer />, document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
