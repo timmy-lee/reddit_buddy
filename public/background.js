@@ -30,27 +30,42 @@ function getPosts(subreddit) {
 }
 
 function setPosts(subreddit, posts) {
-  posts = posts.filter( ({data}) => checkRead(data));
+  posts = posts.filter( ({data}) => checkNotRead(data));
   const subreddits = JSON.parse(localStorage.getItem('subreddits'));
-  subreddits[subreddit] = posts;
+  subreddits[subreddit].posts = posts;
   localStorage.setItem('subreddits', JSON.stringify(subreddits));
   console.log(posts);
 }
 
-function checkRead(post) {
+function parsePosts(subreddit) {
+  const subreddits = JSON.parse(localStorage.getItem('subreddits'));
+  const {posts} = subreddits[subreddit];
+
+  return posts;
+}
+
+// all { posts, seenIds,}
+
+function markRead(post) {
+  const {subreddit, id, num_comments: numComments} = post;
+  const subreddits = JSON.parse(localStorage.getItem('subreddits'));
+  subreddits[subreddit].seenIds[id] = numComments;
+}
+
+function checkNotRead(post) {
   const {subreddit, id} = post;
   const subreddits = JSON.parse(localStorage.getItem('subreddits'));
 
-  if (subreddits[subreddit][id]) {
-    return true;
-  } else {
+  if (subreddits[subreddit].seenIds[id]) {
     return false;
+  } else {
+    return true;
   }
 }
 
 function addSubreddit(subreddit) {
-  const subreddits = JSON.parse(localStorage.getItem('subreddits'));
-  subreddits[subreddit] = true;
+  const subreddits = JSON.parse(localStorage.getItem('subreddits')) || {};
+  subreddits[subreddit] = {posts: [], seenIds: {}};
   localStorage.setItem('subreddits', JSON.stringify(subreddits));
   // const subredditNames = Object.keys(subreddits);
 }
