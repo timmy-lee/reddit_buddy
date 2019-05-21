@@ -41,7 +41,7 @@ function parsePosts(subreddit) {
   const subreddits = JSON.parse(localStorage.getItem('subreddits'));
   const {posts} = subreddits[subreddit];
 
-  return posts;
+  return posts.map( ({data}) => data);
 }
 
 // all { posts, seenIds,}
@@ -76,7 +76,7 @@ function deleteSubreddit(subreddit) {
   localStorage.setItem('subreddits', JSON.stringify(subreddits));
 }
 
-function getSubs() {
+function getSubreddits() {
   const subreddits = JSON.parse(localStorage.getItem('subreddits'));
   if (subreddits) {
     return Object.keys(subreddits);    
@@ -92,7 +92,7 @@ chrome.alarms.create("fetch-subreddit-posts", {
 
 chrome.alarms.onAlarm.addListener(function(alarm){
   if(alarm.name==="fetch-subreddit-posts"){
-    const subreddits = getSubs();
+    const subreddits = getSubreddits();
     for (let subreddit of subreddits) {
       getPosts(subreddit);
     }
