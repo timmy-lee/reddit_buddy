@@ -27,6 +27,7 @@ export default class NewThreads extends React.Component {
     subreddits[subreddit.toLowerCase()].seenIds[id] = numComments;
     localStorage.setItem('subreddits', JSON.stringify(subreddits));
     this.setState({});
+    chrome.tabs.create({ url: `https://www.reddit.com${post.permalink}` });
   }
 
   markAllRead = () => {
