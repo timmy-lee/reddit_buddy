@@ -18,10 +18,11 @@ const LIST = [
 	'movies',
 ];
 
-function SearchSave({ updateSavedSubreddits }) {
+function SearchSave() {
 	const [text, setText] = useState('');
 	const [subscribed, setSubscribed] = useState('');
 	const [showMessage, setShowMessage] = useState(false);
+	const [showErrorMessage, setErrorMessage] = useState(false);
 	const [type, setType] = useState('top');
 	const [open, setOpen] = useState(false);
 	const dropdownRef = useRef(null);
@@ -63,36 +64,38 @@ function SearchSave({ updateSavedSubreddits }) {
 		setOpen(!open);
 	}
 
-	function afterActions(subreddits) {
+	function afterActions() {
 		setSubscribed(text);
 		setText('');
 		setShowMessage(true);
 		setTimeout(() => {
 			setShowMessage(false);
 		}, 5000);
-		updateSavedSubreddits(subreddits);
 	}
 
 	function handleSubmit() {
 		const savedSubreddits = JSON.parse(localStorage.getItem('subreddits'));
 		if (text.trim().length > 0) {
-			if (savedSubreddits && savedSubreddits.length > 0) {
-				if (savedSubreddits.every(({ name }) => name !== text)) {
-					savedSubreddits.push({
-						name: text,
-						type,
-					});
+			if (savedSubreddits) {
+				const subreddits = Object.keys(savedSubreddits);
+				if (subreddits.every(subreddit => subreddit !== text)) {
+					savedSubreddits[text] = { ...savedSubreddits[text], type };
 					localStorage.setItem('subreddits', JSON.stringify(savedSubreddits));
-					afterActions(savedSubreddits);
+					afterActions();
+				} else {
+					setErrorMessage(true);
+					setTimeout(() => {
+						setErrorMessage(false);
+					}, 5000);
 				}
 			} else {
-				const subredditsArray = [];
-				subredditsArray.push({
-					name: text,
-					type,
-				});
-				localStorage.setItem('subreddits', JSON.stringify(subredditsArray));
-				afterActions(subredditsArray);
+				const newSubreddit = {
+					[text]: {
+						type,
+					},
+				};
+				localStorage.setItem('subreddits', JSON.stringify(newSubreddit));
+				afterActions();
 			}
 		}
 	}
@@ -128,6 +131,9 @@ function SearchSave({ updateSavedSubreddits }) {
 				<p className="success-message">
 					You're now subscribed to <bold>r/{subscribed}</bold> notification!
 				</p>
+			)}
+			{showErrorMessage && (
+				<p className="error-message">r/{text} already exists in your subscriptions!</p>
 			)}
 			<p id="mohnish">mohnish was once a sheep herder before he joined toutapp</p>
 		</div>

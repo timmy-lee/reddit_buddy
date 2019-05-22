@@ -13,26 +13,44 @@ export default class Manage extends React.Component {
 
 	grabSubreddits = () => {
 		const subreddits = JSON.parse(localStorage.getItem('subreddits'));
+		const subredditsArray = [];
+		for (let key in subreddits) {
+			subredditsArray.push({
+				name: key,
+				type: subreddits[key].type,
+			});
+		}
 		if (subreddits) {
-			this.setState({ subreddits });
+			this.setState({ subreddits: subredditsArray });
 		}
 	};
 
 	deleteSubreddit = subredditName => {
 		const subreddits = JSON.parse(localStorage.getItem('subreddits'));
-		const updatedSubreddits = subreddits.filter(subreddit => subreddit.name !== subredditName);
-		localStorage.setItem('subreddits', JSON.stringify(updatedSubreddits));
-		this.setState({ subreddits: updatedSubreddits });
+		delete subreddits[subredditName];
+		localStorage.setItem('subreddits', JSON.stringify(subreddits));
+		const subredditsArray = [];
+		for (let key in subreddits) {
+			subredditsArray.push({
+				name: key,
+				type: subreddits[key].type,
+			});
+		}
+		this.setState({ subreddits: subredditsArray });
 	};
 
 	saveChanges = (name, type) => {
 		const subreddits = JSON.parse(localStorage.getItem('subreddits'));
-		const foundIndex = subreddits.findIndex(subreddit => subreddit.name === name);
-		console.log('type is', type);
-		subreddits[foundIndex]['type'] = type;
-		console.log(foundIndex, subreddits);
+		subreddits[name].type = type;
 		localStorage.setItem('subreddits', JSON.stringify(subreddits));
-		this.setState({ subreddits });
+		const subredditsArray = [];
+		for (let key in subreddits) {
+			subredditsArray.push({
+				name: key,
+				type: subreddits[key].type,
+			});
+		}
+		this.setState({ subreddits: subredditsArray });
 	};
 
 	render() {
