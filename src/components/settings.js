@@ -63,6 +63,8 @@ export default class Settings extends React.Component {
   }
 
   _toggleDarkMode = () => {
+    const { updateDarkMode } = this.props;
+    updateDarkMode();
     this.setState({ isDarkMode: !this.state.isDarkMode });
     const currentSettings = JSON.parse(localStorage.getItem('settings')) || {};
     currentSettings.isDarkMode = !currentSettings.isDarkMode;

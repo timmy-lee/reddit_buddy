@@ -12,6 +12,13 @@
   border-radius: 5px;
 }
 
+.chrome-popup-container .error-message {
+	padding: 5px;
+	color: #fff;
+	background-color: #ff4c4c;
+	border-radius: 5px;
+}
+
 #giant-emoji {
   position: absolute;
   font-size: 100px;

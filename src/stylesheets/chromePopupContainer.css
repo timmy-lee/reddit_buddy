@@ -5,6 +5,11 @@
   margin: 0;
 }
 
+.chrome-popup-container.dark-mode {
+  background-color: #000;
+  color: #FBA6FF;
+}
+
 .chrome-popup-container ul {
   padding: 0;
   margin: 0;
@@ -22,8 +27,13 @@
   cursor: pointer;
 }
 
+
 .chrome-popup-container li.active {
   background-color: #BCFF8C;
+}
+
+.chrome-popup-container.dark-mode li.active {
+  background-color: #6EB33E;
 }
 
 .chrome-popup-container .tab-body-container {
