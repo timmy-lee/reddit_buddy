@@ -52,7 +52,7 @@ function parsePosts(subreddit) {
 function markRead(post) {
   const {subreddit, id, num_comments: numComments} = post;
   const subreddits = JSON.parse(localStorage.getItem('subreddits'));
-  subreddits[subreddit].seenIds[id] = numComments;
+  subreddits[subreddit.toLowerCase()].seenIds[id] = numComments;
   localStorage.setItem('subreddits', JSON.stringify(subreddits));
 }
 
@@ -70,15 +70,19 @@ function markAllRead() {
 }
 
 function checkNotRead(post) {
-	const { subreddit, id } = post;
-	const subreddits = JSON.parse(localStorage.getItem('subreddits'));
+  const { subreddit, id } = post;
+  console.log(post);
+  const subreddits = JSON.parse(localStorage.getItem('subreddits'));
+  console.log(subreddits);
 
-	if (subreddits[subreddit].seenIds[id]) {
+	if (subreddits[subreddit.toLowerCase()].seenIds[id]) {
 		return false;
 	} else {
 		return true;
 	}
 }
+
+//{ subreddits: { subreddit: { posts : [], seenIds: {} }}}
 
 function addSubreddit(subreddit) {
 	const subreddits = JSON.parse(localStorage.getItem('subreddits')) || {};

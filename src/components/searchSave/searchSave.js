@@ -91,8 +91,10 @@ function SearchSave() {
 			} else {
 				const newSubreddit = {
 					[text]: {
-						type,
-					},
+            type,
+            seenIds: {},
+            posts: [],
+          },
 				};
 				localStorage.setItem('subreddits', JSON.stringify(newSubreddit));
 				afterActions();
