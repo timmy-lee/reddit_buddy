@@ -78,8 +78,8 @@ function SearchSave() {
 		if (text.trim().length > 0) {
 			if (savedSubreddits) {
 				const subreddits = Object.keys(savedSubreddits);
-				if (subreddits.every(subreddit => subreddit !== text)) {
-					savedSubreddits[text] = { ...savedSubreddits[text], type };
+				if (subreddits.every(subreddit => subreddit.toLowerCase() !== text.toLowerCase())) {
+					savedSubreddits[text.toLowerCase()] = { ...savedSubreddits[text.toLowerCase()], type };
 					localStorage.setItem('subreddits', JSON.stringify(savedSubreddits));
 					afterActions();
 				} else {
@@ -90,7 +90,7 @@ function SearchSave() {
 				}
 			} else {
 				const newSubreddit = {
-					[text]: {
+					[text.toLowerCase()]: {
 						type,
 					},
 				};
