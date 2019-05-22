@@ -11,6 +11,18 @@ export default class ChromePopupContainer extends React.Component {
     this.state = { activeTab: 'newThreads' };
   }
 
+  componentDidUpdate() {
+    console.log('updated')
+  };
+
+  componentDidMount() {
+    console.log('sup wit it');
+  }
+
+  componentWillUnmount() {
+    console.log('bye bish');
+  }
+
   render() {
     console.log('hi');
     const { activeTab } = this.state;
