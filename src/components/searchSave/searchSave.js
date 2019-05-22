@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './searchSave.css';
+import SelectType from '../selectType';
 
 const LIST = [
 	'askreddit',
@@ -15,8 +16,9 @@ const LIST = [
 	'movies',
 ];
 
-function SearchSave() {
+function SearchSave({ updateSavedSubreddits }) {
 	const [text, setText] = useState('');
+	const [type, setType] = useState('top');
 	const [open, setOpen] = useState(false);
 	const dropdownRef = useRef(null);
 
@@ -43,6 +45,10 @@ function SearchSave() {
 		}
 	}
 
+	function handleChange(e) {
+		setType(e.target.value);
+	}
+
 	function handleItemClick(x) {
 		setText(x);
 		setOpen(false);
@@ -58,16 +64,20 @@ function SearchSave() {
 		if (savedSubreddits && savedSubreddits.length > 0) {
 			if (savedSubreddits.every(({ subreddit }) => subreddit !== text)) {
 				savedSubreddits.push({
-					subreddit: text,
+					name: text,
+					type,
 				});
 				localStorage.setItem('subreddits', JSON.stringify(savedSubreddits));
+				updateSavedSubreddits(savedSubreddits);
 			}
 		} else {
 			const subredditsArray = [];
 			subredditsArray.push({
-				subreddit: text,
+				name: text,
+				type,
 			});
 			localStorage.setItem('subreddits', JSON.stringify(subredditsArray));
+			updateSavedSubreddits(subredditsArray);
 		}
 	}
 
@@ -91,6 +101,7 @@ function SearchSave() {
 					</ul>
 				)}
 			</div>
+			<SelectType value={type} handleChange={handleChange} />
 			<button onClick={handleSubmit}>save</button>
 		</div>
 	);

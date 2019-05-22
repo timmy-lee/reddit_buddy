@@ -1,0 +1,10 @@
+.list-item-container {
+	display: flex;
+	width: 300px;
+	margin: auto;
+}
+
+.list-item-container .actions {
+	display: flex;
+	margin-left: auto;
+}
