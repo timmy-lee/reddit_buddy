@@ -30,11 +30,14 @@ function getPosts(subreddit) {
 }
 
 function setPosts(subreddit, posts) {
-	posts = posts.filter(({ data }) => checkNotRead(data));
-	const subreddits = JSON.parse(localStorage.getItem('subreddits'));
-	subreddits[subreddit].posts = posts;
-	localStorage.setItem('subreddits', JSON.stringify(subreddits));
-	console.log(posts);
+  posts = posts.filter( ({data}) => checkNotRead(data));
+  if (posts.length > 0) {
+    const subreddits = JSON.parse(localStorage.getItem('subreddits'));
+    subreddits[subreddit].posts = posts;
+    localStorage.setItem('subreddits', JSON.stringify(subreddits));
+    console.log(posts);
+    chrome.browserAction.setBadgeText({text: "+"});
+  }
 }
 
 function parsePosts(subreddit) {
@@ -47,9 +50,23 @@ function parsePosts(subreddit) {
 // all { posts, seenIds,}
 
 function markRead(post) {
-	const { subreddit, id, num_comments: numComments } = post;
-	const subreddits = JSON.parse(localStorage.getItem('subreddits'));
-	subreddits[subreddit].seenIds[id] = numComments;
+  const {subreddit, id, num_comments: numComments} = post;
+  const subreddits = JSON.parse(localStorage.getItem('subreddits'));
+  subreddits[subreddit].seenIds[id] = numComments;
+  localStorage.setItem('subreddits', JSON.stringify(subreddits));
+}
+
+function markAllRead() {
+  const subreddits = JSON.parse(localStorage.getItem('subreddits'));
+  const subredditNames = Object.keys(subreddits);
+
+  for (let subreddit of subredditNames) {
+    subreddits[subreddit].posts.forEach( ({ data: { id } }) => subreddits[subreddit].seenIds[id] = true); 
+    subreddits[subreddit].posts = [];
+  }
+
+  localStorage.setItem('subreddits', JSON.stringify(subreddits));
+  chrome.browserAction.setBadgeText({text: ""});
 }
 
 function checkNotRead(post) {
@@ -85,9 +102,9 @@ function getSubreddits() {
 	}
 }
 
-chrome.alarms.create('fetch-subreddit-posts', {
-	periodInMinutes: 0.5,
-	// when: Date.now() + 1000,
+chrome.alarms.create("fetch-subreddit-posts", {
+  periodInMinutes: 0.3,
+  // when: Date.now() + 1000,
 });
 
 chrome.alarms.onAlarm.addListener(function(alarm) {
@@ -97,6 +114,12 @@ chrome.alarms.onAlarm.addListener(function(alarm) {
 			getPosts(subreddit);
 		}
 	}
+});
+
+chrome.browserAction.setBadgeBackgroundColor({color: 'orange'});
+
+chrome.browserAction.onClicked.addListener(function() {
+  chrome.browserAction.setBadgeText({text: ""});
 });
 // chrome.runtime.onStartup.addListener(() => console.log('startup'));
 
