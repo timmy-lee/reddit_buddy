@@ -12,14 +12,13 @@ export default class NewThreads extends React.Component {
 
   parsePosts = (subreddit) => {
     const subreddits = JSON.parse(localStorage.getItem('subreddits'));
-    // if (!subreddits) return [];
-    const { posts = [] } = subreddits[subreddit];
-  
+    const { posts } = subreddits[subreddit] || [];
+
     return posts.map(({ data }) => data);
   }
-  
+
   // all { posts, seenIds,}
-  
+
   markRead = (post) => {
     console.log(post);
     const {subreddit, id, num_comments: numComments} = post;
@@ -29,16 +28,16 @@ export default class NewThreads extends React.Component {
     localStorage.setItem('subreddits', JSON.stringify(subreddits));
     this.setState({});
   }
-  
+
   markAllRead = () => {
     const subreddits = JSON.parse(localStorage.getItem('subreddits'));
     const subredditNames = Object.keys(subreddits);
-  
+
     for (let subreddit of subredditNames) {
-      subreddits[subreddit].posts.forEach( ({ data: { id } }) => subreddits[subreddit].seenIds[id] = true); 
+      subreddits[subreddit].posts.forEach( ({ data: { id } }) => subreddits[subreddit].seenIds[id] = true);
       subreddits[subreddit].posts = [];
     }
-  
+
     localStorage.setItem('subreddits', JSON.stringify(subreddits));
     chrome.browserAction.setBadgeText({text: ""});
     this.setState({});
