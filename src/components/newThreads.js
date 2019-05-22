@@ -1,6 +1,10 @@
 import React from 'react';
 
 export default class NewThreads extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
   componentDidUpdate() {
     console.log('updated');
@@ -8,7 +12,8 @@ export default class NewThreads extends React.Component {
 
   parsePosts = (subreddit) => {
     const subreddits = JSON.parse(localStorage.getItem('subreddits'));
-    const { posts } = subreddits[subreddit];
+    // if (!subreddits) return [];
+    const { posts = [] } = subreddits[subreddit];
   
     return posts.map(({ data }) => data);
   }
@@ -19,8 +24,10 @@ export default class NewThreads extends React.Component {
     console.log(post);
     const {subreddit, id, num_comments: numComments} = post;
     const subreddits = JSON.parse(localStorage.getItem('subreddits'));
+    subreddits[subreddit].posts = subreddits[subreddit].posts.filter( ({data: {id: postId}}) => postId !== id );
     subreddits[subreddit].seenIds[id] = numComments;
     localStorage.setItem('subreddits', JSON.stringify(subreddits));
+    this.setState({});
   }
   
   markAllRead = () => {
@@ -34,10 +41,12 @@ export default class NewThreads extends React.Component {
   
     localStorage.setItem('subreddits', JSON.stringify(subreddits));
     chrome.browserAction.setBadgeText({text: ""});
+    this.setState({});
   }
 
   render() {
     // const posts = this.parsePosts('nfl');
+    console.log('render');
     return (
       <div className="tab-body-container">
         New Thread Content!
