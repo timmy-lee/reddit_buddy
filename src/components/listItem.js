@@ -14,12 +14,13 @@ function ListItem({ name, deleteSubreddit, type, saveChanges }) {
 		saveChanges(name, type);
 		setEditing(false);
 	}
+
 	return (
 		<div className="list-item-container">
 			<span>{name}</span>
 			<SelectType disabled={!editing} value={selectedType} handleChange={handleChange} />
 			<div className="actions">
-				<button onClick={() => setEditing(!editing)}>Edit</button>
+				{!editing && <button onClick={() => setEditing(!editing)}>Edit</button>}
 				<button onClick={() => deleteSubreddit(name)}>Delete</button>
 				{editing && <button onClick={() => handleSave(name, type)}>Save</button>}
 			</div>

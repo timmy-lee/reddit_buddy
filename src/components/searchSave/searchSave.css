@@ -16,7 +16,8 @@
 	margin: 0;
 	border: 1px solid #dfdfdf;
 	overflow-y: scroll;
-	max-height: 150px;
+	max-height: 200px;
+	background-color: white;
 }
 
 .search-results-container .search-results-item {
