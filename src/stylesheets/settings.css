@@ -1,15 +1,15 @@
 .chrome-popup-container .select-dropdown {
-  font-family: 'Monaco';
-  padding: 6px 15px;
-  margin-left: 10px;
-  -webkit-appearance: none;
+	font-family: 'Monaco';
+	padding: 6px 15px;
+	margin-left: 10px;
+	-webkit-appearance: none;
 }
 
 .chrome-popup-container .success-message {
-  padding: 5px;
-  color: #fff;
-  background-color: #6eb33e;
-  border-radius: 5px;
+	padding: 5px;
+	color: #fff;
+	background-color: #6eb33e;
+	border-radius: 5px;
 }
 
 .chrome-popup-container .error-message {
@@ -20,8 +20,8 @@
 }
 
 #giant-emoji {
-  position: absolute;
-  font-size: 100px;
-  top: 50%;
-  left: 30%;
+	position: absolute;
+	font-size: 100px;
+	top: 50%;
+	left: 30%;
 }
