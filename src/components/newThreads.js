@@ -58,8 +58,8 @@ export default class NewThreads extends React.Component {
     console.log(posts);
     return (
       <div>
-        <h1>{subreddit}</h1>
-        {posts.map( (post) => <div style={{border: "1px solid black", cursor: "pointer"}} onClick={() => this.markRead(post)}>{post.title} - {post.id} </div> )}
+        <h1>📖 {subreddit}</h1>
+        {posts.map( (post) => <div style={{border: "1px solid black", cursor: "pointer", margin: '5px', padding: '5px'}} onClick={() => this.markRead(post)}>{post.title} - {post.author} </div> )}
       </div>
     );
   }
@@ -82,7 +82,6 @@ export default class NewThreads extends React.Component {
     
     return (
       <div className="tab-body-container">
-        New Thread Content!
         {this.getContent()}
         {/* {this.parsePosts('nfl').map( (post) => <div style={{border: "1px solid red"}} onClick={() => this.markRead(post)}>{post.title} - {post.id} </div> )} */}
         <button onClick={this.markAllRead}>Mark All Read</button>

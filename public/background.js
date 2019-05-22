@@ -15,7 +15,13 @@ chrome.browserAction.onClicked.addListener(() => {
 // chrome.browserAction.setPopup(() => {
 //
 // });
-const createURL = subreddit => `https://www.reddit.com/r/${subreddit}.json`;
+const createURL = subreddit => {
+  const subreddits = JSON.parse(localStorage.getItem('subreddits'));
+  const {type = ''} = subreddits[subreddit.toLowerCase()];
+  const url = `https://www.reddit.com/r/${subreddit}/${type}.json`;
+  console.log(url);
+  return url;
+};
 
 function getPosts(subreddit) {
 	fetch(createURL(subreddit))
