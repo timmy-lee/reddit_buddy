@@ -53,7 +53,7 @@ export default class Settings extends React.Component {
     currentSettings.pollingInterval = e.target.value;
     localStorage.setItem('settings', JSON.stringify(currentSettings));
     this._successChanged();
-  }
+  };
 
   _successChanged = () => {
     this.setState({ showMessage: true });

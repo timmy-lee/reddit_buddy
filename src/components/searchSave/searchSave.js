@@ -4,8 +4,10 @@ import SelectType from '../selectType';
 
 const LIST = [
 	'askreddit',
-	'wtf',
 	'cscareerquestions',
+	'programminghumor',
+	'stocks',
+	'funny',
 	'jokes',
 	'justiceserved',
 	'news',
@@ -18,6 +20,8 @@ const LIST = [
 
 function SearchSave({ updateSavedSubreddits }) {
 	const [text, setText] = useState('');
+	const [subscribed, setSubscribed] = useState('');
+	const [showMessage, setShowMessage] = useState(false);
 	const [type, setType] = useState('top');
 	const [open, setOpen] = useState(false);
 	const dropdownRef = useRef(null);
@@ -59,50 +63,73 @@ function SearchSave({ updateSavedSubreddits }) {
 		setOpen(!open);
 	}
 
+	function afterActions(subreddits) {
+		setSubscribed(text);
+		setText('');
+		setShowMessage(true);
+		setTimeout(() => {
+			setShowMessage(false);
+		}, 5000);
+		updateSavedSubreddits(subreddits);
+	}
+
 	function handleSubmit() {
 		const savedSubreddits = JSON.parse(localStorage.getItem('subreddits'));
-		if (savedSubreddits && savedSubreddits.length > 0) {
-			if (savedSubreddits.every(({ subreddit }) => subreddit !== text)) {
-				savedSubreddits.push({
+		if (text.trim().length > 0) {
+			if (savedSubreddits && savedSubreddits.length > 0) {
+				if (savedSubreddits.every(({ name }) => name !== text)) {
+					savedSubreddits.push({
+						name: text,
+						type,
+					});
+					localStorage.setItem('subreddits', JSON.stringify(savedSubreddits));
+					afterActions(savedSubreddits);
+				}
+			} else {
+				const subredditsArray = [];
+				subredditsArray.push({
 					name: text,
 					type,
 				});
-				localStorage.setItem('subreddits', JSON.stringify(savedSubreddits));
-				updateSavedSubreddits(savedSubreddits);
+				localStorage.setItem('subreddits', JSON.stringify(subredditsArray));
+				afterActions(subredditsArray);
 			}
-		} else {
-			const subredditsArray = [];
-			subredditsArray.push({
-				name: text,
-				type,
-			});
-			localStorage.setItem('subreddits', JSON.stringify(subredditsArray));
-			updateSavedSubreddits(subredditsArray);
 		}
 	}
 
 	return (
-		<div className="search-container">
-			<div className="dropdown-container" ref={dropdownRef}>
-				<input
-					className="dropdown-input"
-					type="text"
-					value={text}
-					onFocus={toggleList}
-					onChange={change}
-				/>
-				{open && (
-					<ul className="search-results-container">
-						{handleFilter().map(x => (
-							<li className="search-results-item" key={x} onClick={() => handleItemClick(x)}>
-								{x}
-							</li>
-						))}
-					</ul>
-				)}
+		<div>
+			<h3>
+				add subscriptions here!! <span role="img">🗑🥦☺️🏃‍</span>
+			</h3>
+			<div className="search-container">
+				<div className="dropdown-container" ref={dropdownRef}>
+					<input
+						className="dropdown-input"
+						type="text"
+						value={text}
+						onFocus={toggleList}
+						onChange={change}
+					/>
+					{open && (
+						<ul className="search-results-container">
+							{handleFilter().map(x => (
+								<li className="search-results-item" key={x} onClick={() => handleItemClick(x)}>
+									{x}
+								</li>
+							))}
+						</ul>
+					)}
+				</div>
+				<SelectType value={type} handleChange={handleChange} />
+				<button onClick={handleSubmit}>save</button>
 			</div>
-			<SelectType value={type} handleChange={handleChange} />
-			<button onClick={handleSubmit}>save</button>
+			{showMessage && (
+				<p className="success-message">
+					You're now subscribed to <bold>r/{subscribed}</bold> notification!
+				</p>
+			)}
+			<p id="mohnish">mohnish was once a sheep herder before he joined toutapp</p>
 		</div>
 	);
 }

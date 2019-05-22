@@ -28,19 +28,20 @@ export default class Manage extends React.Component {
 	saveChanges = (name, type) => {
 		const subreddits = JSON.parse(localStorage.getItem('subreddits'));
 		const foundIndex = subreddits.findIndex(subreddit => subreddit.name === name);
-		console.log('type is', type, 'found is', subreddits[foundIndex]);
+		console.log('type is', type);
 		subreddits[foundIndex]['type'] = type;
-		console.log('called here?', subreddits);
+		console.log(foundIndex, subreddits);
 		localStorage.setItem('subreddits', JSON.stringify(subreddits));
 		this.setState({ subreddits });
 	};
 
 	render() {
 		const subreddits = this.state.subreddits;
-		console.log('boop', subreddits);
 		return (
 			<div className="tab-body-container">
-				<h3>my subscriptions</h3>
+				<h3>
+					my subscriptions <span role="img">💍🙊🐠🍓</span>
+				</h3>
 				<ul>
 					{subreddits.map(subreddit => (
 						<ListItem
@@ -51,6 +52,7 @@ export default class Manage extends React.Component {
 						/>
 					))}
 				</ul>
+				<p id="rajesh">i love rajesh with all my heart he is the best engineering lead ever</p>
 			</div>
 		);
 	}
