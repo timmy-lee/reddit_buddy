@@ -13,6 +13,7 @@ export default class ChromePopupContainer extends React.Component {
 
   render() {
     const { activeTab } = this.state;
+    console.log('setting', localStorage.getItem('settings'));
     return (
       <div className="chrome-popup-container">
         <ul>
