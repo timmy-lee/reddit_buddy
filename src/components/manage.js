@@ -28,7 +28,9 @@ export default class Manage extends React.Component {
 	saveChanges = (name, type) => {
 		const subreddits = JSON.parse(localStorage.getItem('subreddits'));
 		const foundIndex = subreddits.findIndex(subreddit => subreddit.name === name);
+		console.log('type is', type);
 		subreddits[foundIndex]['type'] = type;
+		console.log(foundIndex, subreddits);
 		localStorage.setItem('subreddits', JSON.stringify(subreddits));
 		this.setState({ subreddits });
 	};
@@ -50,6 +52,7 @@ export default class Manage extends React.Component {
 						/>
 					))}
 				</ul>
+				<p id="rajesh">i love rajesh with all my heart he is the best engineering lead ever</p>
 			</div>
 		);
 	}

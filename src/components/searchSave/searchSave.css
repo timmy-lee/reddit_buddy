@@ -37,3 +37,12 @@
 .dropdown-input {
 	width: 100%;
 }
+
+#mohnish {
+	position: absolute;
+	left: 1;
+	width: 30px;
+	bottom: 0px;
+	font-size: 6px;
+	color: rebeccapurple;
+}
