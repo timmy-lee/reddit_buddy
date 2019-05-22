@@ -54,12 +54,14 @@ export default class NewThreads extends React.Component {
   }
 
   getPostsUnderSubreddit = (subreddit) => {
+    const { isDarkMode } = this.props;
+    const color = isDarkMode ? '#fff' : '#000';
     const posts = this.parsePosts(subreddit);
     console.log(posts);
     return (
       <div>
         <h1>📖 {subreddit}</h1>
-        {posts.map( (post) => <div style={{border: "1px solid #FBA6FF", cursor: "pointer", margin: '5px', padding: '5px'}} onClick={() => this.markRead(post)}>{post.title} - {post.author} </div> )}
+        {posts.map( (post) => <div style={{border: `1px solid ${color}`, cursor: "pointer", margin: '5px', padding: '5px'}} onClick={() => this.markRead(post)}>{post.title} - {post.author} </div> )}
       </div>
     );
   }
