@@ -11,7 +11,7 @@ function ListItem({ name, deleteSubreddit, type, saveChanges }) {
 	}
 
 	function handleSave(name, type) {
-		saveChanges(name, type);
+		saveChanges(name, selectedType);
 		setEditing(false);
 	}
 
