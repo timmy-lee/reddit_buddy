@@ -33,7 +33,8 @@
 }
 
 .chrome-popup-container.dark-mode li.active {
-  background-color: #6EB33E;
+  background-color: #999999;
+  color: #fff;
 }
 
 .chrome-popup-container .tab-body-container {
