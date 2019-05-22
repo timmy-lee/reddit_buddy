@@ -66,6 +66,7 @@ function markAllRead() {
   }
 
   localStorage.setItem('subreddits', JSON.stringify(subreddits));
+  chrome.browserAction.setBadgeText({text: ""});
 }
 
 function checkNotRead(post) {
