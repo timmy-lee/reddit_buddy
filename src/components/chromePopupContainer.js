@@ -56,11 +56,11 @@ export default class ChromePopupContainer extends React.Component {
   };
 
   _getTabBody = () => {
-    const { activeTab } = this.state;
+    const { activeTab, isDarkMode } = this.state;
 
     switch (activeTab) {
       case 'newThreads':
-        return <NewThreads />;
+        return <NewThreads isDarkMode={isDarkMode} />;
       case 'manage':
         return <Manage />;
       case 'add':

@@ -54,6 +54,8 @@ export default class NewThreads extends React.Component {
   }
 
   getPostsUnderSubreddit = (subreddit) => {
+    const { isDarkMode } = this.props;
+    const color = isDarkMode ? '#fff' : '#000';
     const posts = this.parsePosts(subreddit);
     console.log(posts);
     return (
@@ -83,7 +85,7 @@ export default class NewThreads extends React.Component {
   render() {
     // const subreddits = this.getSubreddits();
     console.log('render');
-    
+
     return (
       <div className="tab-body-container">
         {this.getContent()}
