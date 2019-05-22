@@ -11,55 +11,6 @@ export default class ChromePopupContainer extends React.Component {
 		this.state = { activeTab: 'newThreads', subreddits: [] };
 	}
 
-<<<<<<< HEAD
-  componentDidUpdate() {
-    console.log('updated')
-  };
-
-  componentDidMount() {
-    console.log('sup wit it');
-  }
-
-  componentWillUnmount() {
-    console.log('bye bish');
-  }
-
-  render() {
-    console.log('hi');
-    const { activeTab } = this.state;
-    return (
-      <div className='chrome-popup-container'>
-        <ul>
-          <li
-            onClick={() => this._navigateToTab('newThreads')}
-            className={activeTab === 'newThreads' ? 'active' : ''}
-          >
-            New Threads
-          </li>
-          <li
-            onClick={() => this._navigateToTab('manage')}
-            className={activeTab === 'manage' ? 'active' : ''}
-          >
-           Manage Subscriptions
-          </li>
-          <li
-            onClick={() => this._navigateToTab('add')}
-            className={activeTab === 'add' ? 'active' : ''}
-          >
-            Add Subscriptions
-          </li>
-          <li
-            onClick={() => this._navigateToTab('settings')}
-            className={activeTab === 'settings' ? 'active' : ''}
-          >
-            Settings
-          </li>
-        </ul>
-        {this._getTabBody()}
-      </div>
-    );
-  }
-=======
 	render() {
 		const { activeTab } = this.state;
 		return (
@@ -94,7 +45,6 @@ export default class ChromePopupContainer extends React.Component {
 			</div>
 		);
 	}
->>>>>>> 1ab966a67a2b676d1393f8a0c62228ff7ab43d22
 
 	_navigateToTab = data => {
 		this.setState({ activeTab: data });
