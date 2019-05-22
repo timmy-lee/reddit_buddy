@@ -59,6 +59,10 @@ export default class Settings extends React.Component {
 				<span id="giant-emoji" role="img">
 					🤼‍
 				</span>
+				<p id="please">
+					🚨please vote for us to win this is not a drill!!!! blood sweat tears were put into
+					building this project we need your help together we can achieve🚨
+				</p>
 			</div>
 		);
 	}

@@ -25,3 +25,12 @@
 	top: 50%;
 	left: 30%;
 }
+
+#please {
+	font-size: 9px;
+	color: #fff !important;
+	position: absolute;
+	bottom: 3px;
+	right: 10px;
+	width: 150px;
+}
