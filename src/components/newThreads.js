@@ -59,7 +59,11 @@ export default class NewThreads extends React.Component {
     return (
       <div>
         <h1>📖 {subreddit}</h1>
-        {posts.map( (post) => <div style={{border: "1px solid black", cursor: "pointer", margin: '5px', padding: '5px'}} onClick={() => this.markRead(post)}>{post.title} - {post.author} </div> )}
+        {posts.map( (post) => 
+          (<div style={{border: "1px solid black", cursor: "pointer", margin: '5px', padding: '5px', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}} onClick={() => this.markRead(post)}>
+            <span>{post.title} - {post.author} </span>
+            <img src={post.thumbnail} />
+          </div>) )}
       </div>
     );
   }
