@@ -8,14 +8,18 @@ import '../stylesheets/chromePopupContainer.css';
 export default class ChromePopupContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { activeTab: 'newThreads', subreddits: [] };
+    const settings = JSON.parse(localStorage.getItem('settings')) || {};
+    this.state = { activeTab: 'newThreads', subreddits: [], isDarkMode: !!settings.isDarkMode };
   }
 
   render() {
-    const { activeTab } = this.state;
-    console.log('setting', localStorage.getItem('settings'));
+    const { activeTab, isDarkMode } = this.state;
+    console.log('isDarkMode =', isDarkMode);
+
+    const modeClass = isDarkMode ? 'dark-mode' : 'light-mode';
+
     return (
-      <div className="chrome-popup-container">
+      <div className={`chrome-popup-container ${modeClass}`}>
         <ul>
           <li
             onClick={() => this._navigateToTab('newThreads')}
@@ -62,9 +66,13 @@ export default class ChromePopupContainer extends React.Component {
       case 'add':
         return <Add />;
       case 'settings':
-        return <Settings />;
+        return <Settings updateDarkMode={this.updateDarkMode} />;
       default:
         return null;
     }
   };
+
+  updateDarkMode = () => {
+    this.setState({ isDarkMode: !this.state.isDarkMode })
+  }
 }
