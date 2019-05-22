@@ -54,21 +54,22 @@ export default class NewThreads extends React.Component {
 
   getPostsUnderSubreddit = (subreddit) => {
     const posts = this.parsePosts(subreddit);
+    console.log(posts);
     return (
       <div>
-        {subreddit}
-        {posts.map( (post) => <div style={{border: "1px solid red"}} onClick={() => this.markRead(post)}>{post.title} - {post.id} </div> )}
+        <h1>{subreddit}</h1>
+        {posts.map( (post) => <div style={{border: "1px solid black", cursor: "pointer"}} onClick={() => this.markRead(post)}>{post.title} - {post.id} </div> )}
       </div>
     );
   }
 
   getContent = () => {
     const subreddits = this.getSubreddits();
-
+    console.log(subreddits);
     return (
       <div>
         {subreddits.map( (subreddit) => {
-            this.getPostsUnderSubreddit(subreddit);
+            return this.getPostsUnderSubreddit(subreddit);
         })}
       </div>
     );

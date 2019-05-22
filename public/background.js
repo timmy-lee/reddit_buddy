@@ -1,11 +1,11 @@
 // import { getConsoleOutput } from "@jest/console";
 
-console.log('Hello Christian');
+// console.log('Hello Christian');
 
 chrome.runtime.onInstalled.addListener(async () => {
-	const response = await fetch('https://reddit.com/r/cscareerquestions.json');
-	const parsedResponse = await response.text();
-	console.log('parsedResponse=', parsedResponse);
+	// const response = await fetch('https://reddit.com/r/cscareerquestions.json');
+	// const parsedResponse = await response.text();
+	// console.log('parsedResponse=', parsedResponse);
 });
 
 chrome.browserAction.onClicked.addListener(() => {
@@ -71,9 +71,9 @@ function markAllRead() {
 
 function checkNotRead(post) {
   const { subreddit, id } = post;
-  console.log(post);
+  // console.log(post);
   const subreddits = JSON.parse(localStorage.getItem('subreddits'));
-  console.log(subreddits);
+  // console.log(subreddits);
 
 	if (subreddits[subreddit.toLowerCase()].seenIds[id]) {
 		return false;
