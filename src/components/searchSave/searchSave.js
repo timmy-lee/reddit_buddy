@@ -99,7 +99,11 @@ function SearchSave() {
 				localStorage.setItem('subreddits', JSON.stringify(newSubreddit));
 				afterActions();
 			}
-		}
+    }
+    chrome.alarms.create("fetch-subreddit-posts", {
+      // periodInMinutes: 0.3,
+      when: Date.now() + 500,
+    });
 	}
 
 	return (
