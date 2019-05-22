@@ -10,11 +10,14 @@ export default class Settings extends React.Component {
   componentDidMount() {
     const settings = JSON.parse(localStorage.getItem('settings'));
     const interval = settings && parseInt(settings.pollingInterval);
+    const isDarkMode = settings && !!settings.isDarkMode;
+
     interval && this.setState({ pollingInterval: interval });
+    isDarkMode && this.setState({ isDarkMode });
   }
 
   render() {
-    const { pollingInterval, showMessage } = this.state;
+    const { pollingInterval, showMessage, isDarkMode } = this.state;
 
     return (
       <div id="settings-page" className="tab-body-container">
@@ -28,6 +31,16 @@ export default class Settings extends React.Component {
               <option value="600" selected={pollingInterval === 600}>10 Minutes</option>
               <option value="1800" selected={pollingInterval === 1800}>30 Minutes</option>
             </select>
+          </label>
+        </div>
+        <div className="dark-mode-checkbox">
+          <label>Dark Mode Enabled
+            <input
+              type="checkbox"
+              onChange={this._toggleDarkMode}
+              className="dark-mode-checkbox"
+              checked={isDarkMode}
+            />
           </label>
         </div>
         {showMessage && <p className='success-message'>Your changes are successfully saved</p>}
@@ -47,5 +60,13 @@ export default class Settings extends React.Component {
     setTimeout(() => {
       this.setState({ showMessage: false });
     }, 5000);
+  }
+
+  _toggleDarkMode = () => {
+    this.setState({ isDarkMode: !this.state.isDarkMode });
+    const currentSettings = JSON.parse(localStorage.getItem('settings')) || {};
+    currentSettings.isDarkMode = !currentSettings.isDarkMode;
+    localStorage.setItem('settings', JSON.stringify(currentSettings));
+    this._successChanged();
   }
 }
